@@ -1,4 +1,4 @@
-# TEMPLATE of ARGO Infra Repository
+# GitOps Application Template
 
 # Prerequisite
 - Clone [GitOps Application Template](https://github.com/indentcorp/gitops-app-template) and refer to the following `README.md` for customizing project.
