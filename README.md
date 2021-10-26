@@ -1,5 +1,6 @@
 # GitOps Application Template
 
+![Workflow](static/workflow.png)
 # Prerequisite
 - Clone [GitOps Application Template](https://github.com/indentcorp/gitops-app-template) and refer to the following `README.md` for customizing project.
 - Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
