@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: <NAME_OF_DEV_APPLICATION>
+  namespace: argo-cd
+spec:
+  project: <NAME_OF_PROJECT>
+  source:
+    repoURL: https://github.com/<USER_NAME>/<REPOSITORY_NAME>
+    targetRevision: develop
+    path: k8s/environments/dev`
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: <NAME_OF_DEV_NAMESPACE>
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: <NAME_OF_PROD_APPLICATION>
+  namespace: argo-cd
+spec:
+  project: <NAME_OF_PROJECT>
+  source:
+    repoURL: https://github.com/<USER_NAME>/<REPOSITORY_NAME>
+    targetRevision: develop
+    path: k8s/environments/dev`
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: <NAME_OF_PROD_NAMESPACE>
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: false

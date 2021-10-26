@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <APPLICATION_NAME>-depl
+spec:
+  replicas: 4
+  containers:
+    - name: <APPLICATION_NAME>
+      envFrom:
+        - secretRef:
+          name: <APPLICATION_NAME>-secret

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: <NAME OF PROJECT>
+  namespace: <NAME OF NAMESPACE>
+  finalizers:
+    - resource-finializer.argocd.argoproj.io
+spec:
+  description: <DESCRIPTION>
+  sourceRepos:
+    - 'https://github.com/<USER_NAME>/<REPOSITORY_NAME>'
+  destinations:
+    - namespace: <NAMESPACE>-prod
+      server: 'https://kubernetes.default.svc'
+    - namespace: <NAMESPACE>-dev
+      server: 'https://kubernetes.default.svc'
