@@ -4,6 +4,20 @@ metadata:
   name: <APPLICATION_NAME>-depl
 spec:
   replicas: 4
+  template:
+    metadata:
+      labels:
+        app: <APPLICATION_NAME>
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: environment
+                    operator: In
+                    values:
+                      - prod
   containers:
     - name: <APPLICATION_NAME>
       envFrom:
