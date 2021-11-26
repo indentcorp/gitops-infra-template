@@ -1,0 +1,62 @@
+name: CD
+on:
+  repository_dispatch:
+    types: [image-created]
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to deploy. 'main' should NEVER be chosen.
+        required: true
+        default: develop
+      run_id:
+        description: GitHub Action run_id.
+        required: true
+
+jobs:
+  # Deploy archived resources.
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Extract variables
+        id: extract-variables
+        run: |
+          case ${{github.event_name}} in
+              workflow_dispatch)
+                  echo "::set-output name=branch::${{github.event.inputs.branch}}"
+                  echo "::set-output name=run_id::${{github.event.inputs.run_id}}"
+                  ;;
+              repository_dispatch)
+                  echo "::set-output name=branch::${{github.event.client_payload.branch}}"
+                  echo "::set-output name=run_id::${{github.event.client_payload.run_id}}"
+                  ;;
+              *)
+                  echo "Event name is invalid."
+                  exit 1
+          esac
+
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.extract-variables.outputs.branch }}
+
+      - name: Download archived resources
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.SOURCE_ACCESS_TOKEN }}
+          workflow: cd.yml
+          workflow_conclusion: success
+          run_id: ${{ steps.extract-variables.outputs.run_id }}
+          name: k8s
+          repo: ${{ secrets.SOURCE_REPO }}
+          path: k8s
+
+      - name: Commit kustomized YAMLs
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git add k8s
+          git commit -am "Deploy application by #${{steps.extract-variables.outputs.run_id}}
+          Github Action #${{steps.extract-variables.outputs.run_id}} is used to deploy this application."
+          git push -u origin ${{github.event.client_payload.branch}}
