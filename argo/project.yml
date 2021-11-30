@@ -10,7 +10,7 @@ spec:
   sourceRepos:
     - 'https://github.com/<USER_NAME>/<REPOSITORY_NAME>'
   destinations:
-    - namespace: <NAMESPACE>-prod
+    - namespace: <NAMESPACE>
       server: 'https://kubernetes.default.svc'
     - namespace: <NAMESPACE>-dev
       server: 'https://kubernetes.default.svc'
