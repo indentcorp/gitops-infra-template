@@ -44,7 +44,7 @@ jobs:
       - name: Download archived resources
         uses: dawidd6/action-download-artifact@v2
         with:
-          github_token: ${{ secrets.SOURCE_ACCESS_TOKEN }}
+          github_token: ${{ secrets.CD_ACCESS_TOKEN }}
           workflow: cd.yml
           workflow_conclusion: success
           run_id: ${{ steps.extract-variables.outputs.run_id }}
