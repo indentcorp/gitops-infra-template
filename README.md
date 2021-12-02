@@ -5,10 +5,10 @@ This schematic diagram is out of current; it will be updated shortly.
 ## Prerequisite
 - Clone [GitOps Application Template](https://github.com/indentcorp/gitops-app-template) and refer to the following `README.md` for customizing project.
 - Or, click `Use this template` button on the top right to create a new repository from this template.
-- Please be certain that it is a private repository. CD ACCESS KEY is only enabled when the repository is private.
+- Please be certain that it is a private repository. CD_ACCESS_KEY is only enabled when the repository is private.
 - Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
 - Create ECR Repository for application.
-- Set repository Secrets `SOURCE_REPO`
+- Set repository Secrets `SOURCE_REPO`.
 
 ## How to play
 ### Create ArgoCD resources
