@@ -1,5 +1,4 @@
 # GitOps Infrastructure Template
-This schematic diagram is out of current; it will be updated shortly.
 ![Workflow](static/workflow.png)
 
 ## Prerequisite
