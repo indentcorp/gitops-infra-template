@@ -18,8 +18,8 @@ spec:
                     operator: In
                     values:
                       - prod
-  containers:
-    - name: <APPLICATION_NAME>
-      envFrom:
-        - secretRef:
-          name: <APPLICATION_NAME>-secret
+      containers:
+        - name: <APPLICATION_NAME>
+          envFrom:
+            - secretRef:
+                name: <APPLICATION_NAME>-secret
