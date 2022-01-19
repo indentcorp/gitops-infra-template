@@ -25,4 +25,4 @@ kubectl apply -f argo/
 You don't need to edit those files yourself. Those files are modified in the source repository and sent to this repository for commit.
 
 ## Contact
-If you have any questions or want to improve GitOps flow, don't hesitate to let us know on [#infra](https://indentcorp.slack.com/archives/C0177J0C953) channel! Any contributions you make are greatly appreciated.
+If you have any questions or want to improve GitOps flow, don't hesitate to let us know on [#team-infra-sre](https://indentcorp.slack.com/archives/C02D3SVPWC8) channel! Any contributions you make are greatly appreciated.
