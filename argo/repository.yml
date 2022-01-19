@@ -1,7 +1,7 @@
 apiVersion: kubernetes-client.io/v1
 kind: ExternalSecret
 metadata:
-  name: sync
+  name: <APPLICATION_NAME>
   namespace: argo-cd
 spec:
   backendType: secretsManager
