@@ -1,17 +1,25 @@
-apiVersion: kubernetes-client.io/v1
+apiVersion: external-secrets.io/v1alpha1
 kind: ExternalSecret
 metadata:
   name: <APPLICATION_NAME>
   namespace: argo-cd
 spec:
-  backendType: secretsManager
-  region: ap-northeast-2
+  refreshInterval: 10m
+  secretStoreRef:
+    name: indent
+    kind: ClusterSecretStore
+  target:
+    name: <APPLICATION_NAME>
+    creationPolicy: Owner
+    template:
+      metadata:
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      data:
+        githubAppID: "{{ .githubAppID | toString }}"
+        githubAppInstallationID: "{{ .githubAppInstallationID | toString }}"
+        githubAppPrivateKey: "{{ .githubAppPrivateKey | toString }}"
+        type: git
+        url: https://github.com/<USER_NAME>/<REPOSITORY_NAME>
   dataFrom:
-    - cd/github-app
-  template:
-    metadata:
-      labels:
-        argocd.argoproj.io/secret-type: repository
-    stringData:
-      type: git
-      url: https://github.com/<USER_NAME>/<REPOSITORY_NAME>
+    - key: cd/github-app
